@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="VebLab2.Services/VebLab2.Services.csproj" />
+  <Project Path="VebLab2/VebLab2.csproj" />
+</Solution>

@@ -1,0 +1,24 @@
+﻿@model VebLab2.Models.EmailViewModel
+
+<h2>Відправка повідомлення</h2>
+
+<!-- Форм яка відправить дані в метод SendEmail -->
+<form asp-action="SendEmail" method="post">
+    <div>
+        <label>Email отримувача:</label>
+        <input asp-for="Email" type="email" required />
+    </div>
+    <br />
+    <div>
+        <label>Повідомлення:</label>
+        <textarea asp-for="Message" required></textarea>
+    </div>
+    <br />
+    <button type="submit">Submit</button>
+</form>
+
+
+@if (ViewBag.Success != null)
+{
+    <h3 style="color: green;">@ViewBag.Success</h3>
+}
