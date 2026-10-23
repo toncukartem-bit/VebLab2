@@ -1,15 +1,16 @@
-﻿@{
-    ViewData["Title"] = "Завантаження файлу";
+﻿@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
+
+@{
+    ViewData["Title"] = Localizer["Title"];
 }
 
-<div class="text-center mt-5">
-    <h2>Завантажити новий файл на сервер</h2>
-    <hr />
+<h2>@Localizer["Title"]</h2>
 
-    <form asp-action="Upload" asp-controller="Home" method="post" enctype="multipart/form-data" class="mt-4">
-        <div class="mb-3 w-50 mx-auto">
-            <input type="file" name="uploadedFile" class="form-control" required />
-        </div>
-        <button type="submit" class="btn btn-success">Завантажити файл</button>
-    </form>
-</div>
+<form asp-action="Upload" asp-controller="Home" method="post" enctype="multipart/form-data">
+    <div class="mb-3">
+        <label>@Localizer["SelectFile"]</label>
+        <input type="file" name="uploadedFile" class="form-control" style="max-width: 300px;" />
+    </div>
+    <button type="submit" class="btn btn-primary">@Localizer["UploadButton"]</button>
+</form>

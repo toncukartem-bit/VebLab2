@@ -1,0 +1,29 @@
+﻿@using Microsoft.AspNetCore.Localization
+@using Microsoft.Extensions.Options
+@inject IOptions<RequestLocalizationOptions> LocOptions
+
+@{
+    
+    var cultures = LocOptions.Value.SupportedUICultures.ToList();
+
+    var requestCulture = Context.Features.Get<IRequestCultureFeature>().RequestCulture.UICulture.Name;
+
+    var returnUrl = string.IsNullOrEmpty(Context.Request.Path) ? "~/" : $"~{Context.Request.Path.Value}";
+}
+
+<form asp-controller="Home" asp-action="SetLanguage" asp-route-returnUrl="@returnUrl" method="post" class="d-flex">
+    <select name="culture" class="form-select form-select-sm" style="width: auto;" onchange="this.form.submit();">
+        @foreach (var culture in cultures)
+        {
+            var displayName = culture.Name == "uk" ? "УКРАЇНСЬКА" : "ENGLISH";
+            if (culture.Name == requestCulture)
+            {
+                <option value="@culture.Name" selected>@displayName</option>
+            }
+            else
+            {
+                <option value="@culture.Name">@displayName</option>
+            }
+        }
+    </select>
+</form>

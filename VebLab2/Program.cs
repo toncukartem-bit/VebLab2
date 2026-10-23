@@ -14,14 +14,27 @@ builder.Host.UseSerilog((context, configuration) =>
     );
 });
 
-// Add services to the container.
-builder.Services.AddControllersWithViews();
-// Реєструємо наш сервіс для відправки пошти
+
+builder.Services.AddLocalization(options => options.ResourcesPath = "Resources");
+
+builder.Services.AddControllersWithViews()
+    .AddViewLocalization()
+    .AddDataAnnotationsLocalization();
+
 builder.Services.AddTransient<VebLab2.Services.IEmailSender, VebLab2.Services.EmailSenderService>();
+
+var supportedCultures = new[] { "uk", "en" };
+
+builder.Services.Configure<RequestLocalizationOptions>(options =>
+{
+    options.SetDefaultCulture(supportedCultures[0]);
+    options.AddSupportedCultures(supportedCultures);
+    options.AddSupportedUICultures(supportedCultures);
+});
 
 var app = builder.Build();
 
-// Логер
+app.UseRequestLocalization();
 app.UseMiddleware<RequestLoggingMiddleware>();
 
 // Configure the HTTP request pipeline.

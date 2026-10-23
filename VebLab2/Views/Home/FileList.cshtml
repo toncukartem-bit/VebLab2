@@ -1,30 +1,27 @@
-﻿@model List<string>
+﻿@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
+@model List<string>
+
 @{
-    ViewData["Title"] = "Список файлів";
+    ViewData["Title"] = Localizer["Title"];
 }
 
-<div class="text-center mt-5">
-    <h2>Доступні файли на сервері</h2>
-    <hr />
+<h2>@Localizer["Title"]</h2>
 
-    @if (Model.Count == 0)
-    {
-        <p class="text-muted">Немає завантажених файлів.</p>
-    }
-    else
-    {
-        <ul class="list-group w-50 mx-auto">
-            @foreach (var fileName in Model)
-            {
-                <!-- Це реалізація Пункту 3: перехід на файл при кліку -->
-                <li class="list-group-item">
-                    <a href="~/Files/@fileName" target="_blank">@fileName</a>
-                </li>
-            }
-        </ul>
-    }
-    
-    <div class="mt-4">
-        <a asp-action="Upload" asp-controller="Home" class="btn btn-primary">Завантажити ще один файл</a>
-    </div>
-</div>
+@if (Model != null && Model.Any())
+{
+    <ul>
+        @foreach (var file in Model)
+        {
+            <li>
+                <a href="~/Files/@file" target="_blank">@file</a>
+            </li>
+        }
+    </ul>
+}
+else
+{
+    <p>@Localizer["NoFiles"]</p>
+}
+
+<a asp-action="Upload" asp-controller="Home">@Localizer["BackLink"]</a>

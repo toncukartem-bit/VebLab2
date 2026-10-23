@@ -1,20 +1,21 @@
-﻿@model VebLab2.Models.EmailViewModel
+﻿@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
+@model VebLab2.Models.EmailViewModel
 
-<h2>Відправка повідомлення</h2>
+<h2>@Localizer["FormTitle"]</h2>
 
-<!-- Форм яка відправить дані в метод SendEmail -->
 <form asp-action="SendEmail" method="post">
     <div>
-        <label>Email отримувача:</label>
+        <label>@Localizer["EmailLabel"]</label>
         <input asp-for="Email" type="email" required />
     </div>
     <br />
     <div>
-        <label>Повідомлення:</label>
+        <label>@Localizer["MessageLabel"]</label>
         <textarea asp-for="Message" required></textarea>
     </div>
     <br />
-    <button type="submit">Submit</button>
+    <button type="submit">@Localizer["SubmitButton"]</button>
 </form>
 
 
