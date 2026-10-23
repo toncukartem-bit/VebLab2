@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Localization;
 using System;
 using VebLab2.Models;
 using VebLab2.Services;
+using VebLab2.Models;
 
 namespace VebLab2.Controllers
 {
@@ -81,6 +82,31 @@ namespace VebLab2.Controllers
                 new CookieOptions { Expires = DateTimeOffset.UtcNow.AddYears(1) }
             );
             return LocalRedirect(returnUrl);
+        }
+
+        [HttpGet]
+        public IActionResult ProfileForm()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult ProfileForm(UserProfile model)
+        {
+            // виконання вимоги "Провалідувати модель в action"
+            var validator = new UserProfileValidator();
+            var validationResult = validator.Validate(model);
+
+            if (!validationResult.IsValid)
+            {
+                foreach (var error in validationResult.Errors)
+                {
+                    ModelState.AddModelError(error.PropertyName, error.ErrorMessage);
+                }
+                return View(model); 
+            }
+
+            return Content("Валідація пройдена успішно!");
         }
 
     }

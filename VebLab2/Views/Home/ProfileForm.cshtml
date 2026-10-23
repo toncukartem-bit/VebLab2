@@ -1,0 +1,61 @@
+﻿@model VebLab2.Models.UserProfile
+@{
+    ViewData["Title"] = "Форма профілю";
+}
+
+<h2>Реєстрація користувача</h2>
+
+<form asp-action="ProfileForm" method="post" class="mt-4" style="max-width: 500px;">
+    <div class="mb-2">
+        <label>Ім'я</label>
+        <input asp-for="FirstName" class="form-control" />
+        <span asp-validation-for="FirstName" class="text-danger"></span>
+    </div>
+    <div class="mb-2">
+        <label>Прізвище</label>
+        <input asp-for="LastName" class="form-control" />
+        <span asp-validation-for="LastName" class="text-danger"></span>
+    </div>
+    <div class="mb-2">
+        <label>Email</label>
+        <input asp-for="Email" class="form-control" />
+        <span asp-validation-for="Email" class="text-danger"></span>
+    </div>
+    <div class="mb-2">
+        <label>Вік</label>
+        <input asp-for="Age" class="form-control" />
+        <span asp-validation-for="Age" class="text-danger"></span>
+    </div>
+    <div class="mb-2">
+        <label>Дата народження</label>
+        <input asp-for="BirthDate" type="date" class="form-control" />
+        <span asp-validation-for="BirthDate" class="text-danger"></span>
+    </div>
+    <div class="mb-2">
+        <label>Телефон</label>
+        <input asp-for="PhoneNumber" placeholder="+380XXXXXXXXX" class="form-control" />
+        <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+    </div>
+    <div class="mb-2">
+        <label>Досвід роботи (років)</label>
+        <input asp-for="ExperienceYears" class="form-control" />
+        <span asp-validation-for="ExperienceYears" class="text-danger"></span>
+    </div>
+    <div class="mb-2">
+        <label>Посада</label>
+        <input asp-for="Position" class="form-control" />
+        <span asp-validation-for="Position" class="text-danger"></span>
+    </div>
+    <div class="mb-2">
+        <label>Пароль</label>
+        <input asp-for="Password" type="password" class="form-control" />
+        <span asp-validation-for="Password" class="text-danger"></span>
+    </div>
+    <div class="mb-3">
+        <label>Підтвердіть пароль</label>
+        <input asp-for="ConfirmPassword" type="password" class="form-control" />
+        <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Відправити</button>
+</form>
